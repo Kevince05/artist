@@ -10,13 +10,13 @@ public class artist extends Thread{
 	
 	public void run() {
 		while(true) {
-			t = ThreadLocalRandom.current().nextInt(t_min, t_max);
-			try {
-				sleep(t);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			if(chairs.availablePermits() == 0) {
+			if(chairs.availablePermits() < 4) {
+				t = ThreadLocalRandom.current().nextInt(t_min, t_max);
+				try {
+					sleep(10000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 				chairs.release();
 				System.out.println("A chair has been freed after " + t + "s.");
 			}
